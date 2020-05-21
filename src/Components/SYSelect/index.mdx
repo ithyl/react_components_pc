@@ -1,0 +1,136 @@
+---
+name: SYSelect
+route: /SYSelect
+sidebar: true
+---
+
+import { Playground, Props } from 'docz';
+import { SYSelect } from "../../";
+import { toJS } from 'mobx'
+let selectStore=null
+let selectStore1=null
+
+# SYSelect Component
+
+## 普通下拉框
+<Playground>
+<SYSelect 
+control={true} 
+onMount={store => { selectStore1 = store }} 
+onChange={() => { console.log(selectStore1) }}
+defaultValue='a'
+>
+    <Option key='a'>aaa</Option>
+    <Option key='b'>bbb</Option>
+</SYSelect>
+</Playground>
+
+## 带分页的联想框
+<Playground>
+<SYSelect 
+onMount={store => { selectStore = store }}
+dataSource={[
+    {name:'张三',value:'zs'},
+    {name:'李四',value:'ls'},
+    {name:'王五',value:'ww'},
+]} 
+page
+onChange={() => { console.log(toJS(selectStore.selectedData)) }}
+ />
+</Playground>
+
+
+
+# SYSelect
+
+- 带分页，可联想，可使用远程数据的select组件。
+
+## API
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| formatAfter | 请求之后格式化 | res => res | - |
+| formatAfter | 请求之前格式化 | params => params | - |
+| defaultValue | 默认选中 | string | - |
+| autoLoad | 自动加载 | boolean | true |
+| allowClear | 允许清除 | boolean | true |
+| searchKey | 搜索参数 | string | 'search' |
+| nameKey | option的显示文本 | string | 'name' |
+| valueKey | option的value | string | 'value' |
+| optionKey | option的key(用来区分每条数据的唯一标识符) | string | 'id' |
+| resultKey | 请求返回数据 | string | 'results' |
+| totalKey | 返回总条数key | string | 'totalcount' |
+| limit | 多选模式选择个数 | number | 5 |
+| control | 是否是受控组件（不在form表单中使用请设为false） | boolean | true |
+| mode | 多选 | 'multiple' | - |
+| limit | 多选模式可选数量 | number | 999 |
+| url | 远程数据地址 | string | - |
+| params | 每次获取数据携带参数 | object | {current:1,pageSize:10,searchValue:''} |
+| onError | 获取数据请求错误回调 | () => void | 无 |
+| pagination | 分页参数 | object | {simple: true,pageSize: 10,onChange: ...} |
+| page | 启用分页 | boolean | false |
+| onMount | 组件加载完成时触发,参数store为组件状态 | (store)=> void | 无 |
+
+### 组件请求后台接口期望返回的标准数据格式
+
+```js
+{
+  success:true,
+  results:[ // 这里可以使用resultKey配置
+    {
+      name:'张三',// 这里可以使用nameKey配置
+      value:'zs'// 这里可以使用valueKey配置
+    },
+    {name:'李四',value:'ls'},
+    {name:'王五',value:'ww'},
+  ],
+  totalcount:20 // 这里可以使用totalKey配置
+}
+
+```
+- 如果后台返回的格式太离谱，自己使用formatAfter格式化一下再传给组件
+
+### formatAfter示例
+
+```js
+formatAfter=(res) => {
+  /**
+   * res是后台接口返回的数据，在浏览器network查看
+   * 假如res是这样的
+  res = {
+    success: true,
+    totalcount: 20,
+    results: [
+      {
+        a: {
+          data: [
+            { name: '张三', value: 'zs' }
+          ]
+        },
+        b: 111,
+        c: 222
+      }
+    ]
+  }
+  期望的return结果为
+  {
+    success: true,
+    totalcount: 20,
+    results: [
+      { name: '张三', value: 'zs' }
+    ]
+  }
+  */
+  return {
+    ...res,
+    results: res.results[0].a.data
+  }
+}
+```
+
+## Store
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| value | 选中值 | (多选模式时为伪数组请使用value.slice()转换为array)array或string | - |
+---

@@ -1,0 +1,155 @@
+@font-medium: PingFang SC-medium;
+@redColor: #ff5252;
+@pinkColor: #f06292;
+@purpleColor: #ba68c8;
+@tealColor: #00897b;
+
+.borderColor(@color: #FFFFFF) {
+    border: 1px solid @color;
+}
+
+.testRed {
+    .borderColor(@redColor)
+}
+
+.testPurple {
+    .borderColor(@purpleColor)
+}
+
+.testPink {
+    .borderColor(@pinkColor)
+}
+
+.testTeal {
+    .borderColor(@tealColor)
+}
+
+.syrow {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.syblank {
+    height: 20px;
+}
+
+.sybutton {
+    font-size: 16px;
+    color: #FFFFFF;
+    // font-family: @font-medium;
+    min-width: 116px;
+    height: 38px;
+    border-radius:4px;
+}
+.sycxbutton {
+    font-size: 14px;
+    color: #FFFFFF;
+    min-width: 100px;
+    height: 32px;
+    border-radius:2px;
+}
+.syconfirmbutton {
+    font-size: 16px;
+    color: #FFFFFF;
+    min-width: 260px;
+    height: 38px;
+    border-radius:4px;
+}
+.symodalbutton {
+    font-size: 14px;
+    color: #FFFFFF;
+    min-width: 80px;
+    height: 31px;
+    border-radius:4px;
+}
+.sybutton-ok {
+    &:extend(.sybutton);
+    background-color: #4A90E2
+}
+
+.sybutton-ok:hover,
+.sybutton-ok:visited,
+.sybutton-ok:active,
+.sybutton-ok:focus {
+    &:extend(.sybutton-ok);
+    border-color: #4A90E2;
+}
+
+.sybutton-cancel {
+    &:extend(.sybutton);
+    background-color: #D0021B;
+}
+
+.sybutton-cancel:hover,
+.sybutton-cancel:visited,
+.sybutton-cancel:active,
+.sybutton-cancel:focus {
+    &:extend(.sybutton-cancel);
+    border-color: #D0021B;
+}
+
+.sybutton-query {
+    &:extend(.sycxbutton);
+    background-color: #4A90E2;
+}
+
+.sybutton-query:hover,
+.sybutton-query:visited,
+.sybutton-query:active,
+.sybutton-query:focus {
+    &:extend(.sybutton-query);
+    border-color: #4A90E2;
+}
+
+.sybutton-del {
+    &:extend(.sycxbutton);
+    background-color: #D0021B;
+}
+
+.sybutton-del:hover,
+.sybutton-del:visited,
+.sybutton-del:active,
+.sybutton-del:focus {
+    &:extend(.sybutton-del);
+    border-color: #D0021B;
+}
+
+.sybutton-confirm {
+    &:extend(.syconfirmbutton);
+    background-color: #4A90E2;
+}
+
+.sybutton-confirm:hover,
+.sybutton-confirm:visited,
+.sybutton-confirm:active,
+.sybutton-confirm:focus {
+    &:extend(.sybutton-confirm);
+    border-color: #4A90E2;
+}
+
+.sybutton-ok-modal {
+    &:extend(.symodalbutton);
+    background-color: #4896EC;
+}
+
+.sybutton-ok-modal:hover,
+.sybutton-ok-modal:visited,
+.sybutton-ok-modal:active,
+.sybutton-ok-modal:focus {
+    &:extend(.sybutton-ok-modal);
+    border-color: #4896EC;
+}
+.sybutton-cancel-modal {
+    &:extend(.symodalbutton);
+    background-color: #FFFFFF;
+    color: #333333;
+    border:1px solid #CCCCCC;
+}
+
+.sybutton-cancel-modal:hover,
+.sybutton-cancel-modal:visited,
+.sybutton-cancel-modal:active,
+.sybutton-cancel-modal:focus {
+    &:extend(.sybutton-cancel-modal);
+    border-color: #CCCCCC;
+}
