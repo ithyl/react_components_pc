@@ -47,7 +47,7 @@ console.log('index,,,,,,,,,,,,,,,,',Store.selectList)
                             treeDefaultExpandAll
                             onChange={this.onChange}
                         >
-                            <TreeNode value="parent 1" title="parent 1">
+                            <TreeNode value="parent 1" title="parent 12">
                                 <TreeNode value="parent 1-0" title="parent 1-0">
                                     <TreeNode value="leaf1" title="my leaf" />
                                     <TreeNode value="leaf2" title="your leaf" />
